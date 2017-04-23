@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BookMonkey.Services.Models;
 
 namespace BookMonkey.Services
@@ -42,6 +43,11 @@ namespace BookMonkey.Services
         public IList<Book> GetAllBooks()
         {
             return new List<Book>(_books);
+        }
+
+        public Book GetByIsbn(string isbn)
+        {
+            return _books.FirstOrDefault(b => b.Isbn == isbn);
         }
     }
 }

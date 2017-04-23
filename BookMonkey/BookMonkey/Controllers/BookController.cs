@@ -16,5 +16,11 @@ namespace BookMonkey.Controllers
         {
             return View(_bookService.GetAllBooks());
         }
+
+        public IActionResult Detail(string id)
+        {
+            var book = _bookService.GetByIsbn(id);
+            return View(book);
+        }
     }
 }
