@@ -1,4 +1,4 @@
-﻿namespace BookMonkey.Models
+﻿namespace BookMonkey.Services.Models
 {
     public class Book
     {

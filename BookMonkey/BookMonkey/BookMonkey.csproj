@@ -25,5 +25,8 @@
   <ItemGroup>
     <Folder Include="Views\Book\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookMonkey.Services\BookMonkey.Services.csproj" />
+  </ItemGroup>
 
 </Project>

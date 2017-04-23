@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BookMonkey.Models;
+using BookMonkey.Services.Models;
 
 namespace BookMonkey.Services
 {
