@@ -33,6 +33,9 @@ namespace BookMonkey.Controllers
         [HttpPost]
         public IActionResult Edit(Book book)
         {
+            if (!ModelState.IsValid)
+                return View(book);
+
             _bookService.UpdateBook(book);
             return RedirectToAction(nameof(Detail), new { id = book.Isbn });
         }
