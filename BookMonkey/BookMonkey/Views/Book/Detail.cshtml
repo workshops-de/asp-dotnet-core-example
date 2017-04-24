@@ -6,8 +6,10 @@
 
 <h2>Book Details</h2>
 
+
 <fieldset>
-    <legend>@Model.Title</legend>
+    
+    <legend>@Model.Title <a asp-controller="Book" asp-action="Edit" asp-route-id="@Model.Isbn">Edit Book</a></legend>
     
     <label>Subtitle: </label><span>@Model.Subtitle</span><br/>
     <label>ISBN: </label><span>@Model.Isbn</span><br/>

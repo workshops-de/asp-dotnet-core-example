@@ -1,0 +1,29 @@
+﻿@model BookMonkey.Services.Models.Book
+
+<h2>Edit Book</h2>
+
+<form asp-controller="Book" asp-action="Edit" method="post">
+    <div class="form-group">
+        <label class="control-label" asp-for="Title">Title: </label><input class="form-control" asp-for="Title" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="Subtitle">Subtitle: </label><input class="form-control" asp-for="Subtitle" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="Isbn">ISBN: </label><input class="form-control" asp-for="Isbn" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="Author">Author: </label><input class="form-control" asp-for="Author" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="NumPages"># of pages: </label><input class="form-control" asp-for="NumPages" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="Publisher">Publisher: </label><input class="form-control" asp-for="Publisher" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="Abstract">Abstract: </label><textarea class="form-control" asp-for="Abstract"></textarea>
+    </div>
+
+    <input type="submit" value="Save" class="btn btn-primary"/>
+</form>

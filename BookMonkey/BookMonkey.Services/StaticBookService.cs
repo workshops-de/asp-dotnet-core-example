@@ -49,5 +49,20 @@ namespace BookMonkey.Services
         {
             return _books.FirstOrDefault(b => b.Isbn == isbn);
         }
+
+        public void UpdateBook(Book book)
+        {
+            var bookToEdit = _books.FirstOrDefault(b => b.Isbn == book.Isbn);
+
+            if (bookToEdit != null)
+            {
+                bookToEdit.Abstract = book.Abstract;
+                bookToEdit.Author = book.Author;
+                bookToEdit.NumPages = book.NumPages;
+                bookToEdit.Publisher = book.Publisher;
+                bookToEdit.Subtitle = book.Subtitle;
+                bookToEdit.Title = book.Title;
+            }
+        }
     }
 }

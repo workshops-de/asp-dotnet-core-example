@@ -7,5 +7,6 @@ namespace BookMonkey.Services
     {
         IList<Book> GetAllBooks();
         Book GetByIsbn(string isbn);
+        void UpdateBook(Book book);
     }
 }

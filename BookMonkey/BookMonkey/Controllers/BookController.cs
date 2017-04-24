@@ -1,4 +1,5 @@
 using BookMonkey.Services;
+using BookMonkey.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookMonkey.Controllers
@@ -21,6 +22,19 @@ namespace BookMonkey.Controllers
         {
             var book = _bookService.GetByIsbn(id);
             return View(book);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var book = _bookService.GetByIsbn(id);
+            return View(book);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Book book)
+        {
+            _bookService.UpdateBook(book);
+            return RedirectToAction(nameof(Detail), new { id = book.Isbn });
         }
     }
 }
