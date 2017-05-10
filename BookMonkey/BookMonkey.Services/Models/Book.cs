@@ -4,6 +4,8 @@ namespace BookMonkey.Services.Models
 {
     public class Book
     {
+        public long BookId { get; set; }
+
         public string Isbn { get; set; }
 
         [Required]
