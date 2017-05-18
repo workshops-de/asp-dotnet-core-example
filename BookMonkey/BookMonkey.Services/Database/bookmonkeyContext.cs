@@ -6,13 +6,18 @@ namespace BookMonkey.Services.Database
 {
     public partial class BookMonkeyContext : DbContext
     {
+        private readonly string _connectionstring;
         public virtual DbSet<Books> Books { get; set; }
         public virtual DbSet<Publishers> Publishers { get; set; }
 
+        public BookMonkeyContext(string connectionstring)
+        {
+            _connectionstring = connectionstring;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\bookmonkey.db");
+            optionsBuilder.UseSqlite(_connectionstring);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

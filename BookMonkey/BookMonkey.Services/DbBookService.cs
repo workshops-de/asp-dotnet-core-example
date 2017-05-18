@@ -3,14 +3,22 @@ using System.Linq;
 using BookMonkey.Services.Database;
 using BookMonkey.Services.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace BookMonkey.Services
 {
     public class DbBookService : IBookService
     {
+        private readonly IOptions<DbOptions> _dbOptions;
+
+        public DbBookService(IOptions<DbOptions> dbOptions)
+        {
+            _dbOptions = dbOptions;
+        }
+
         public IList<Book> GetAllBooks()
         {
-            using (var context = new BookMonkeyContext())
+            using (var context = new BookMonkeyContext(_dbOptions.Value.Connectionstring))
             {
                 return context.Books.Include(b => b.Publisher).Select(b => new Book
                 {
@@ -28,7 +36,7 @@ namespace BookMonkey.Services
 
         public Book GetByIsbn(string isbn)
         {
-            using (var context = new BookMonkeyContext())
+            using (var context = new BookMonkeyContext(_dbOptions.Value.Connectionstring))
             {
                 var book = context.Books.Include(b => b.Publisher).FirstOrDefault(b => b.Isbn == isbn);
                 return new Book
@@ -47,7 +55,7 @@ namespace BookMonkey.Services
 
         public void UpdateBook(Book book)
         {
-            using (var context = new BookMonkeyContext())
+            using (var context = new BookMonkeyContext(_dbOptions.Value.Connectionstring))
             {
                 var dbBook = context.Books.Include(b => b.Publisher).FirstOrDefault(b => b.Id == book.BookId);
 
