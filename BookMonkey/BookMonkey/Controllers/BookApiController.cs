@@ -28,6 +28,10 @@ namespace BookMonkey.Controllers
         public async Task<IActionResult> GetBook(string isbn)
         {
             var book = await _bookService.GetByIsbn(isbn);
+
+            if (book == null)
+                return NotFound();
+
             return Ok(book);
         }
 
@@ -35,6 +39,14 @@ namespace BookMonkey.Controllers
         [Route("{isbn}")]
         public async Task<IActionResult> UpdateBook(string isbn, [FromBody] Book book)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var fromFromDb = await _bookService.GetByIsbn(isbn);
+
+            if (fromFromDb == null)
+                return NotFound();
+
             await _bookService.UpdateBook(book);
             return Ok();
         }

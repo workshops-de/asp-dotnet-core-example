@@ -40,6 +40,10 @@ namespace BookMonkey.Services
             using (var context = new BookMonkeyContext(_dbOptions.Value.Connectionstring))
             {
                 var book = await context.Books.Include(b => b.Publisher).FirstOrDefaultAsync(b => b.Isbn == isbn);
+
+                if (book == null)
+                    return null;
+
                 return new Book
                 {
                     BookId = book.Id,
