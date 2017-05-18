@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using BookMonkey.Services;
 using BookMonkey.Services.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,30 +14,30 @@ namespace BookMonkey.Controllers
             _bookService = bookService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_bookService.GetAllBooks());
+            return View(await _bookService.GetAllBooks());
         }
 
-        public IActionResult Detail(string id)
+        public async Task<IActionResult> Detail(string id)
         {
-            var book = _bookService.GetByIsbn(id);
+            var book = await _bookService.GetByIsbn(id);
             return View(book);
         }
 
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
-            var book = _bookService.GetByIsbn(id);
+            var book = await _bookService.GetByIsbn(id);
             return View(book);
         }
 
         [HttpPost]
-        public IActionResult Edit(Book book)
+        public async Task<IActionResult> Edit(Book book)
         {
             if (!ModelState.IsValid)
                 return View(book);
 
-            _bookService.UpdateBook(book);
+            await _bookService.UpdateBook(book);
             return RedirectToAction(nameof(Detail), new { id = book.Isbn });
         }
     }

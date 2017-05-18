@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BookMonkey.Services.Models;
 
 namespace BookMonkey.Services
 {
     public interface IBookService
     {
-        IList<Book> GetAllBooks();
-        Book GetByIsbn(string isbn);
-        void UpdateBook(Book book);
+        Task<IList<Book>> GetAllBooks();
+        Task<Book> GetByIsbn(string isbn);
+        Task UpdateBook(Book book);
     }
 }

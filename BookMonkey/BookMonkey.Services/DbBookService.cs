@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BookMonkey.Services.Database;
 using BookMonkey.Services.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +17,11 @@ namespace BookMonkey.Services
             _dbOptions = dbOptions;
         }
 
-        public IList<Book> GetAllBooks()
+        public async Task<IList<Book>> GetAllBooks()
         {
             using (var context = new BookMonkeyContext(_dbOptions.Value.Connectionstring))
             {
-                return context.Books.Include(b => b.Publisher).Select(b => new Book
+                return await context.Books.Include(b => b.Publisher).Select(b => new Book
                 {
                     BookId = b.Id,
                     Isbn = b.Isbn,
@@ -30,15 +31,15 @@ namespace BookMonkey.Services
                     NumPages = (int) b.NumPages,
                     Author = b.Author,
                     Title = b.Title
-                }).ToList();
+                }).ToListAsync();
             }
         }
 
-        public Book GetByIsbn(string isbn)
+        public async Task<Book> GetByIsbn(string isbn)
         {
             using (var context = new BookMonkeyContext(_dbOptions.Value.Connectionstring))
             {
-                var book = context.Books.Include(b => b.Publisher).FirstOrDefault(b => b.Isbn == isbn);
+                var book = await context.Books.Include(b => b.Publisher).FirstOrDefaultAsync(b => b.Isbn == isbn);
                 return new Book
                 {
                     BookId = book.Id,
@@ -53,11 +54,11 @@ namespace BookMonkey.Services
             }
         }
 
-        public void UpdateBook(Book book)
+        public async Task UpdateBook(Book book)
         {
             using (var context = new BookMonkeyContext(_dbOptions.Value.Connectionstring))
             {
-                var dbBook = context.Books.Include(b => b.Publisher).FirstOrDefault(b => b.Id == book.BookId);
+                var dbBook = await context.Books.Include(b => b.Publisher).FirstOrDefaultAsync(b => b.Id == book.BookId);
 
                 dbBook.Isbn = book.Isbn;
                 dbBook.Abstract = book.Abstract;
@@ -67,7 +68,7 @@ namespace BookMonkey.Services
                 dbBook.Author = book.Author;
                 dbBook.Title = book.Title;
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
     }

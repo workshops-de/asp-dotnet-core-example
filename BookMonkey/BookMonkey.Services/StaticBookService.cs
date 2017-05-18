@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BookMonkey.Services.Models;
 
 namespace BookMonkey.Services
@@ -40,17 +41,17 @@ namespace BookMonkey.Services
             },
         };
 
-        public IList<Book> GetAllBooks()
+        public Task<IList<Book>> GetAllBooks()
         {
-            return new List<Book>(_books);
+            return Task.FromResult<IList<Book>>(new List<Book>(_books));
         }
 
-        public Book GetByIsbn(string isbn)
+        public Task<Book> GetByIsbn(string isbn)
         {
-            return _books.FirstOrDefault(b => b.Isbn == isbn);
+            return Task.FromResult(_books.FirstOrDefault(b => b.Isbn == isbn));
         }
 
-        public void UpdateBook(Book book)
+        public Task UpdateBook(Book book)
         {
             var bookToEdit = _books.FirstOrDefault(b => b.Isbn == book.Isbn);
 
@@ -63,6 +64,8 @@ namespace BookMonkey.Services
                 bookToEdit.Subtitle = book.Subtitle;
                 bookToEdit.Title = book.Title;
             }
+
+            return Task.CompletedTask;
         }
     }
 }
