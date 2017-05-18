@@ -36,6 +36,8 @@ namespace BookMonkey
             services.AddOptions();
             services.Configure<DbOptions>(Configuration);
 
+            services.AddCors();
+
             if (Environment.EnvironmentName == "TestWithStaticData")
                 services.AddScoped<IBookService, StaticBookService>();
             else
@@ -51,6 +53,8 @@ namespace BookMonkey
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseCors(p => p.WithOrigins("http://bookmonkey.workshops.de:80").AllowAnyMethod().AllowAnyHeader());
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
