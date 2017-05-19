@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMonkey", "BookMonkey\BookMonkey.csproj", "{CC0A7AAC-8F2B-4F4E-AC5A-2269BE32AF20}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMonkey.Services", "BookMonkey.Services\BookMonkey.Services.csproj", "{A9027298-8BC7-4C76-8D98-AF4C9A279BDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMonkey.Tests", "BookMonkey.Tests\BookMonkey.Tests.csproj", "{B830DDEE-FBC0-4188-96E5-EEBF79ED1239}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A9027298-8BC7-4C76-8D98-AF4C9A279BDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9027298-8BC7-4C76-8D98-AF4C9A279BDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9027298-8BC7-4C76-8D98-AF4C9A279BDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B830DDEE-FBC0-4188-96E5-EEBF79ED1239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B830DDEE-FBC0-4188-96E5-EEBF79ED1239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B830DDEE-FBC0-4188-96E5-EEBF79ED1239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B830DDEE-FBC0-4188-96E5-EEBF79ED1239}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
