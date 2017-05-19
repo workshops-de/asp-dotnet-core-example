@@ -8,6 +8,7 @@ namespace BookMonkey.Services
     {
         Task<IList<Book>> GetAllBooks();
         Task<Book> GetByIsbn(string isbn);
+        Task<IList<string>> GetAuthorsOfBook(string isbn);
         Task UpdateBook(Book book);
     }
 }

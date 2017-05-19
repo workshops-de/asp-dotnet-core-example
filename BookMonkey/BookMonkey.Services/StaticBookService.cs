@@ -51,6 +51,17 @@ namespace BookMonkey.Services
             return Task.FromResult(_books.FirstOrDefault(b => b.Isbn == isbn));
         }
 
+        public Task<IList<string>> GetAuthorsOfBook(string isbn)
+        {
+            var book = _books.FirstOrDefault(b => b.Isbn == isbn);
+            if (book == null)
+                return Task.FromResult<IList<string>>(null);
+
+            var authors = book.Author?.Split('/').Select(a => a.Trim()).Where(s => !string.IsNullOrWhiteSpace(s));
+
+            return Task.FromResult<IList<string>>(authors.ToList());
+        }
+
         public Task UpdateBook(Book book)
         {
             var bookToEdit = _books.FirstOrDefault(b => b.Isbn == book.Isbn);

@@ -58,6 +58,18 @@ namespace BookMonkey.Services
             }
         }
 
+        public async Task<IList<string>> GetAuthorsOfBook(string isbn)
+        {
+            using (var context = new BookMonkeyContext(_dbOptions.Value.Connectionstring))
+            {
+                var book = await context.Books.FirstOrDefaultAsync(b => b.Isbn == isbn);
+
+                var authors = book?.Author?.Split('/').Select(a => a.Trim()).Where(s => !string.IsNullOrWhiteSpace(s));
+
+                return authors.ToList();
+            }
+        }
+
         public async Task UpdateBook(Book book)
         {
             using (var context = new BookMonkeyContext(_dbOptions.Value.Connectionstring))

@@ -50,5 +50,17 @@ namespace BookMonkey.Controllers
             await _bookService.UpdateBook(book);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("{isbn}/authors")]
+        public async Task<IActionResult> GetAuthorsOfBook(string isbn)
+        {
+            var authors = await _bookService.GetAuthorsOfBook(isbn);
+
+            if (authors == null)
+                return NotFound();
+
+            return Ok(authors);
+        }
     }
 }
