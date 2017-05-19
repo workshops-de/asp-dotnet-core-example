@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
 using BookMonkey.Services;
 using BookMonkey.Services.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookMonkey.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/books")]
     public class BookApiController : Controller

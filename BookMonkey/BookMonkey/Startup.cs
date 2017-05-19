@@ -54,7 +54,7 @@ namespace BookMonkey
             loggerFactory.AddDebug();
 
             app.UseCors(p => p.WithOrigins("http://bookmonkey.workshops.de:80").AllowAnyMethod().AllowAnyHeader());
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -64,6 +64,13 @@ namespace BookMonkey
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticAuthenticate = true,
+                AuthenticationScheme = "Cookies",
+                ExpireTimeSpan = TimeSpan.FromMinutes(15),
+            });
 
             app.UseStaticFiles();
 
