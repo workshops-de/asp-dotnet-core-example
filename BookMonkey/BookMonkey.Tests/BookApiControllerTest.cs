@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BookMonkey.Controllers;
 using BookMonkey.Services;
@@ -32,6 +31,31 @@ namespace BookMonkey.Tests
             var okResult = Assert.IsType<OkObjectResult>(result);
             var model = Assert.IsAssignableFrom<IList<Book>>(okResult.Value);
             Assert.Equal(fakeBookList.Count, model.Count);
+        }
+
+        [Fact]
+        public async Task Asking_the_controller_for_an_existing_book_will_return_200_OK()
+        {
+            const string isbn = "1234";
+            var book = new Book();
+            _serviceMock.GetByIsbn(isbn).Returns(Task.FromResult(book));
+
+            var result = await _subject.GetBook(isbn);
+
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsAssignableFrom<Book>(okResult.Value);
+            Assert.Same(book, model);
+        }
+
+        [Fact]
+        public async Task Asking_the_controller_for_an_nonexistent_book_will_return_a_404()
+        {
+            const string isbn = "1234";
+            _serviceMock.GetByIsbn(isbn).Returns(Task.FromResult<Book>(null));
+
+            var result = await _subject.GetBook(isbn);
+
+            Assert.IsType<NotFoundResult>(result);
         }
     }
 }
